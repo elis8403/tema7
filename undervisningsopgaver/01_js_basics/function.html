@@ -9,14 +9,13 @@
 </head>
 
 <body>
-
-    <h1>Klik mig</h1>
     <script>
-        document.querySelector("h1").addEventListener("click", showMessage);
-
-        function showMessage() {
-            alert("Hello everyone!");
+        function visBesked(message) {
+            let first = "Info: ";
+            return `${first} ${message}`;
         }
+
+        console.log(visBesked("Kamilla underviser imorgen"));
 
     </script>
 </body>
