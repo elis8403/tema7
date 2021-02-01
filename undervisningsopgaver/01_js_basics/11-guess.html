@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <h1> Prøv og gæt hvilket tal computeren tænker på ? </h1>
+    <input type="text" id="tal">
+    <button>GÆT</button>
+
+    <script>
+        console.log(Math.round(Math.random() * 20));
+
+        document.querySelector("button").addEventListener("click", buttonClicked);
+
+        function buttonClicked() {
+            let tal = document.querySelector("#tal").value;
+            let resultat;
+
+            if (tal == math.random) {
+                resultat = `Du gættede rigtigt!`
+            } else if (tal > math.random) {
+                resultat = `Du gættede lidt for højt...`
+            } else if (tal < math.random) {
+                resultat = `Du gættede lidt for lavt...`
+            } else if (isNaN(tal)) {
+                resultat = `Det er ikke et tal, prøv igen.`
+            } else(tal <= 0) {
+                resultat = `Tallet er mindre end 0, prøv igen.`
+            }
+        }
+
+    </script>
+</body>
+
+</html>
