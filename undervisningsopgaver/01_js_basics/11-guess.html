@@ -10,9 +10,12 @@
 
 <body>
     <h1>Gæt mit tal mellem 0 og 20</h1>
+
     <input type="text" id="gæt">
+
     <button>GÆT</button>
-    <button id="nyt_spil">NYT SPIL</button>
+
+    <!--    <button id="nyt_spil">NYT SPIL</button>-->
 
     <script>
         const tilfældigtTal = Math.round(Math.random() * 20);
@@ -22,14 +25,20 @@
             antalGæt++;
             const guess = document.querySelector("#gæt").value;
             console.log("tilfældigtTal", tilfældigtTal);
-            console.log("brugerGæt", guess);
+            console.log("guess", guess);
 
             if (guess == tilfældigtTal) {
+
                 console.log(`Du gættede rigtigt! Du har haft ${antalGæt} gæt`);
+
             } else if (guess > tilfældigtTal) {
+
                 console.log(`Du gættede for højt! Du har haft ${antalGæt} gæt`);
+
             } else {
+
                 console.log(`Du gættede for lavt! Du har haft ${antalGæt} gæt`);
+
             }
         }
 
