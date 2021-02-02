@@ -18,8 +18,7 @@
 
         section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            /* repeat (auto-fit, minmax(400px, 1fr));*/
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             grid-gap: 20px;
             padding: 1rem;
         }
@@ -67,7 +66,18 @@
 
     </main>
 
-    <script></script>
+    <script>
+        const titel = document.querySelector("header");
+        console.log(titel);
+        titel.textContent = "Billedgalleri";
+        titel.innerHTML = "<h1>Billeder</h1>";
+
+        const pic1 = document.querySelector("article:first-child img");
+        console.log(pic1);
+
+        pic1.alt = "Billede af arkitektur";
+
+    </script>
 
 </body>
 
