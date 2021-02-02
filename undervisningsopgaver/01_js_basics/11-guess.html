@@ -9,29 +9,27 @@
 </head>
 
 <body>
-    <h1> Prøv og gæt hvilket tal computeren tænker på ? </h1>
-    <input type="text" id="tal">
+    <h1>Gæt mit tal mellem 0 og 20</h1>
+    <input type="text" id="gæt">
     <button>GÆT</button>
+    <button id="nyt_spil">NYT SPIL</button>
 
     <script>
-        console.log(Math.round(Math.random() * 20));
+        const tilfældigtTal = Math.round(Math.random() * 20);
+        document.querySelector("button").addEventListener("click", guessTal);
 
-        document.querySelector("button").addEventListener("click", buttonClicked);
+        function guessTal() {
+            antalGæt++;
+            const guess = document.querySelector("#gæt").value;
+            console.log("tilfældigtTal", tilfældigtTal);
+            console.log("brugerGæt", guess);
 
-        function buttonClicked() {
-            let tal = document.querySelector("#tal").value;
-            let resultat;
-
-            if (tal == math.random) {
-                resultat = `Du gættede rigtigt!`
-            } else if (tal > math.random) {
-                resultat = `Du gættede lidt for højt...`
-            } else if (tal < math.random) {
-                resultat = `Du gættede lidt for lavt...`
-            } else if (isNaN(tal)) {
-                resultat = `Det er ikke et tal, prøv igen.`
-            } else(tal <= 0) {
-                resultat = `Tallet er mindre end 0, prøv igen.`
+            if (guess == tilfældigtTal) {
+                console.log(`Du gættede rigtigt! Du har haft ${antalGæt} gæt`);
+            } else if (guess > tilfældigtTal) {
+                console.log(`Du gættede for højt! Du har haft ${antalGæt} gæt`);
+            } else {
+                console.log(`Du gættede for lavt! Du har haft ${antalGæt} gæt`);
             }
         }
 
