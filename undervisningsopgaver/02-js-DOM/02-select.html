@@ -16,11 +16,16 @@
             width: 100%;
         }
 
+        main {
+            background
+        }
+
         section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             grid-gap: 20px;
-            padding: 1rem;
+            padding: 6rem;
+            margin-top: -3rem;
         }
 
         article {
@@ -36,6 +41,31 @@
 
         header {
             font-size: 3rem;
+        }
+
+        /*        pseudo selector*/
+
+
+        p:nth-child(n) {
+            color: darkslategrey;
+        }
+
+        h2:nth-child(n) {
+            margin-top: 3rem;
+            margin-left: 6rem;
+        }
+
+        article:nth-child(n) {
+            background-color: lavender;
+        }
+
+        header:nth-child(n) {
+            color: darkseagreen;
+            background: rgba(143, 188, 143, 0.47);
+        }
+
+        footer:nth-child(n) {
+            background: rgba(143, 188, 143, 0.47);
         }
 
     </style>
