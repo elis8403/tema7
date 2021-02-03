@@ -19,17 +19,21 @@
     <script>
         document.addEventListener("DOMContentLoaded", start);
 
+        let tæller = 1;
+
         function start() {
             document.querySelector("button").addEventListener("click", buttonClicked);
 
             function buttonClicked() {
-
-                let tæller = 1;
                 tæller++;
 
-                const pic = document.querySelector("article:first-child img");
+                const pic = document.querySelector("article>img");
                 console.log(pic);
-                pic.src = "img.png" + tæller;
+                pic.src = `img${tæller}.png`;
+
+                if (tæller > 7) {
+                    tæller = 0;
+                }
             }
         }
 
