@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML struktur recap</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        main {
+            background
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-gap: 20px;
+            padding: 4rem;
+        }
+
+        article {
+            border: 1px solid #223421;
+        }
+
+        header,
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            border: 1px solid #223421;
+        }
+
+        header {
+            font-size: 3rem;
+        }
+
+        /*        pseudo selector*/
+        p:nth-child(n) {
+            color: darkslategrey;
+        }
+
+        h2:nth-child(n) {
+            margin-top: 3rem;
+            margin-left: 6rem;
+        }
+
+        article:nth-child(n) {
+            background-color: lavender;
+        }
+
+        header:nth-child(n) {
+            color: darkseagreen;
+            background: rgba(143, 188, 143, 0.47);
+        }
+
+        footer:nth-child(n) {
+            background: rgba(143, 188, 143, 0.47);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>Titel</header>
+
+    <main>
+
+        <h2>Undertitel</h2>
+
+        <section>
+            <article>
+                <img src="by.jpg" alt="">
+                <h3>Article 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam itaque facere ratione modi at. Tempora nesciunt omnis cupiditate neque fugit ipsam, velit vitae quo quas explicabo, beatae, ea, eveniet tempore. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde eum rem velit consectetur harum autem asperiores molestiae, accusamus maxime quas distinctio libero voluptatum similique doloremque nihil repellendus qui aliquid earum.</p>
+            </article>
+
+            <article>
+                <img src="natur.jpg" alt="">
+                <h3>Article 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate voluptatem tempore autem aliquid, minima voluptate libero, incidunt aspernatur quidem, odio excepturi doloremque! Fugit mollitia distinctio ea libero deserunt rerum, accusamus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, eligendi, doloremque! Explicabo et porro quia, corporis officia sit tempore eius? Similique qui culpa a tempora, unde praesentium maiores eaque sequi.</p>
+            </article>
+
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("DOM er loaded");
+
+            const titel = document.querySelector("header");
+            console.log(titel);
+            titel.textContent = "Billeder";
+            titel.innerHTML = "<h1>Billedgalleri</h1>";
+
+            //article 1 styling
+            //ændrer titel
+            const by = document.querySelector("article:first-child h3");
+            console.log(by);
+            by.textContent = "Gravhund";
+
+            //ændrer text
+            const byTxt = document.querySelector("article:first-child p");
+            console.log(byTxt);
+            byTxt.textContent = "Her er et billede af en sød gravhund";
+            //ændrer billede
+            const pic1 = document.querySelector("article:nth-child(1) img");
+            console.log(pic1);
+            pic1.src = "hund.jpg";
+            pic1.alt = "En gravhund";
+
+            //article 2 styling
+            //ændrer titel
+            const natur = document.querySelector("article:nth-child(2) h3");
+            console.log(natur);
+            natur.innerHTML = "<b>Gåtur</b>";
+
+            //ændre text
+            const naturTxt = document.querySelector("article:nth-child(2) p");
+            console.log(naturTxt);
+            naturTxt.innerHTML = "<b>Her er et billede af en pige der går med sin hund.</b>";
+
+            //ændre billeder
+            const pic2 = document.querySelector("article:nth-child(2) img");
+            console.log(pic1);
+            pic2.src = "gåtur.jpg";
+            pic2.alt = "Gåtur";
+
+            //jeg indsætter en ny article
+            let mainSection = document.querySelector("section");
+            //nyt article element
+            let newArticle = document.createElement("article");
+            //nyt h3 element
+            let overskrift = document.createElement("h3");
+            //indsæt text til overskrift
+            let overskriftTekst = document.createTextNode("Article 3");
+            //nyt p element
+            let tekst = document.createElement("p");
+            //indsæt tekst ind i p
+            let tekstTekst = document.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore molestiae laboriosam iste, distinctio aliquid nulla beatae est nam dolorem autem eaque quaerat vel earum tempora sapiente. Eos, iure vel voluptatum.")
+            //indsæt nyt billede
+            let img = document.createElement("img");
+            //link til billede
+            img.src = "træ.jpg";
+            //tilføj billede til article
+            newArticle.appendChild(img);
+            //tilfæj article til section
+            mainSection.appendChild(newArticle);
+
+            //tilføj overskrift til article
+            overskrift.appendChild(overskriftTekst);
+            //tilføj text til article
+            newArticle.appendChild(overskrift);
+            // tilføj article til section
+            mainSection.appendChild(newArticle);
+
+            //indsæt tekst i tekst
+            tekst.appendChild(tekstTekst);
+            newArticle.appendChild(tekst);
+            mainSection.appendChild(newArticle);
+
+        }
+
+    </script>
+
+    <footer>
+        <h4>This is a footer</h4>
+    </footer>
+
+</body>
+
+</html>
