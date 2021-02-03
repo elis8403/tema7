@@ -26,18 +26,23 @@
 
             function buttonClicked() {
                 tæller++;
-
                 const pic = document.querySelector("article>img");
                 console.log(pic);
                 pic.src = `img${tæller}.png`;
 
-                if (tæller > 7) {
+                if (tæller <= 7) {
+                    const knap = document.querySelector("button");
+                    console.log(knap);
+                    knap.innerText = "Næste Billede";
+                }
+
+                if (tæller == 8) {
                     tæller = 0;
                     const knap = document.querySelector("button");
                     console.log(knap);
-
-                    knap.innerHTML = "<button>Forfra</button>";
+                    knap.innerText = "Forfra";
                 }
+
             }
         }
 
