@@ -65,10 +65,8 @@
             background: rgba(143, 188, 143, 0.47);
         }
 
-        boxshadow {
-            box-shadow: -11 px 12 px 88 px 5 px rgba(74, 59, 107, 0.97);
-            -webkit-box-shadow: -11 px 12 px 88 px 5 px rgba(74, 59, 107, 0.97);
-            -moz-box-shadow: -11 px 12 px 88 px 5 px rgba(74, 59, 107, 0.97);
+        .boxshadow {
+            box-shadow: -11px 12px 88px 5px rgba(74, 59, 107, 0.97);
         }
 
     </style>
@@ -83,13 +81,13 @@
         <h2>Undertitel</h2>
 
         <section>
-            <article>
+            <article class="boxshadow">
                 <img src="by.jpg" alt="">
                 <h3>Article 1</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam itaque facere ratione modi at. Tempora nesciunt omnis cupiditate neque fugit ipsam, velit vitae quo quas explicabo, beatae, ea, eveniet tempore. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde eum rem velit consectetur harum autem asperiores molestiae, accusamus maxime quas distinctio libero voluptatum similique doloremque nihil repellendus qui aliquid earum.</p>
             </article>
 
-            <article>
+            <article class="boxshadow">
                 <img src="natur.jpg" alt="">
                 <h3>Article 1</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate voluptatem tempore autem aliquid, minima voluptate libero, incidunt aspernatur quidem, odio excepturi doloremque! Fugit mollitia distinctio ea libero deserunt rerum, accusamus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, eligendi, doloremque! Explicabo et porro quia, corporis officia sit tempore eius? Similique qui culpa a tempora, unde praesentium maiores eaque sequi.</p>
@@ -147,6 +145,8 @@
             let mainSection = document.querySelector("section");
             //nyt article element
             let newArticle = document.createElement("article");
+            // add boxshadow på ny article
+            newArticle.classList.add("boxshadow");
             //nyt h3 element
             let overskrift = document.createElement("h3");
             //indsæt text til overskrift
@@ -176,30 +176,28 @@
             newArticle.appendChild(tekst);
             mainSection.appendChild(newArticle);
 
-
             //indsæt tilfældigt billede når man klikker på det
-
             const tilfældigtTal = Math.round(Math.random() * 10);
-
             pic1.addEventListener("click", skiftBillede);
 
-            function skiftBillede() {
-                pic1.src = "https://placeimg.com/640/480/any/grayscale" + tilfældigtTal;
-            }
-
             //box shadow
-            let articleboxshadow = document.querySelector("article:nth-child(n)");
-            articleboxshadow.addEventListener("mouseout", addBoxShadow);
-            articleboxshadow.addEventListener("mouseover", removeBoxShadow);
-
-            function addBoxShadow() {
-                articleboxshadow.classList.add("boxshadow");
-            }
-
-            function removeBoxShadow() {
-                articleboxshadow.classList.remove("boxshadow");
-            };
+            document.querySelector("article:nth-child(1)").addEventListener("mouseover", elementOverAndOut);
+            document.querySelector("article:nth-child(1)").addEventListener("mouseout", elementOverAndOut);
+            document.querySelector("article:nth-child(2)").addEventListener("mouseover", elementOverAndOut);
+            document.querySelector("article:nth-child(2)").addEventListener("mouseout", elementOverAndOut);
+            document.querySelector("article:nth-child(3)").addEventListener("mouseover", elementOverAndOut);
+            document.querySelector("article:nth-child(3)").addEventListener("mouseout", elementOverAndOut);
         }
+        }
+
+        //functionerne skal helst være udenfor andre functioner, så du kan kalde dem fra andre steder
+        function skiftBillede() {
+            pic1.src = "https://placeimg.com/640/480/any/grayscale" + tilfældigtTal;
+        }
+
+        function elementOverAndOut() {
+            console.log("OVER AND OUT");
+            this.classList.toggle("boxshadow")
 
     </script>
 
