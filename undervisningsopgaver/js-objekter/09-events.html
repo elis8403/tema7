@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        body {
+            background-color: #e6ebeb;
+        }
+
+        section {
+            padding: 10px;
+            margin: 0 auto;
+            /*grid (uden at skulle bruge media queries)*/
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+
+    </style>
+
+</head>
+
+<body>
+        <section class="container"></section>
+        <template>
+            <article class="film">
+                <img src="" alt="">
+                <h3></h3>
+                <p></p>
+            </article>
+        </template>
+
+    <script>
+        //DOM skal loade først
+        document.addEventListener("DOMContentLoaded", visFilm);
+
+        let film = [{
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-360.jpg",
+            "navn": "A calling",
+            "instruktør": "Christian Bengtson",
+            "land": "Danmark",
+            "varighed": "20 min",
+            "årstal": "2019",
+        }, {
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-360.jpg",
+            "navn": "A whole in my heart",
+            "instruktør": "Mees Peijnenburg",
+            "land": "Holland",
+            "varighed": "9 min",
+            "årstal": "2015",
+        }, {
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-360.jpg",
+            "navn": "A place in the sun - 110 years after the genocide",
+            "instruktør": "Christian Zipfel",
+            "land": "Tyskland",
+            "varighed": "20 min",
+            "årstal": "2018",
+        }, {
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd-360.jpg",
+            "navn": "A tower of two",
+            "instruktør": "Jacob Krzystof Glocgowski",
+            "land": "Danmark",
+            "varighed": "21 min",
+            "årstal": "2019",
+        }, {
+            "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/2iUOgQpixgIQCxyLtY6KiYuU-360.jpg",
+            "navn": "A worthy man",
+            "instruktør": "Kristian Håskjold",
+            "land": "Danmark",
+            "varighed": "19 min",
+            "årstal": "2018",
+        }];
+
+        function visFilm() {
+            console.log("DOM er loaded");
+
+            const container = document.querySelector(".container");
+            const temp = document.querySelector("template");
+
+            film.forEach(film => {
+                let klon = temp.cloneNode(true).content;
+                //placer film i HTML
+                klon.querySelector("h3").textContent = film.navn;
+                klon.querySelector("img").src = film.billede;
+                klon.querySelector("p").textContent = `${film.instruktør} | ${film.land} | ${film.varighed} | ${film.årstal}`;
+
+                container.appendChild(klon);
+            })
+
+        }
+
+    </script>
+
+</body>
+
+</html>
