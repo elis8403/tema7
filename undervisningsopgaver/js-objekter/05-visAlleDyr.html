@@ -9,15 +9,7 @@
 </head>
 
 <body>
-    <section class="dyr-container"></section>
-    <template>
-        <article id="dyr">
-            <h3></h3>
-            <img src="" alt="">
-            <p class="type">Type: </p>
-            <p class="levested">Levested: </p>
-        </article>
-    </template>
+    <article id="liste"></article>
 
     <script>
         //DOM skal loade først
@@ -56,27 +48,12 @@
         function visDyr() {
             console.log("DOM er loaded");
 
-            console.log(`Navn:${dyr.navn}, Type:${dyr.type}, Billede:${dyr.billede}, levested:${dyr.levested}`);
-
-            const container = document.querySelector(".dyr-container");
-            const dyrTemplate = document.querySelector("template");
-
+            const listevisning = document.querySelector("#liste");
             //løb dyre listen igennem og indsæt dyrene i en template
-
-            dyr.forEach(animal => {
+            dyr.forEach(dyr => {
                 //placer dyrene i HTML
-                let klon = dyrTemplate.cloneNode(true).content;
-                klon.querySelector("h3").textContent = animal.navn;
-                klon.querySelector("img").src = animal.billede;
-                klon.querySelector(".type").textContent += animal.type;
-                klon.querySelector(".levested").textContent += animal.levested;
-                container.appendChild(klon);
+                listevisning.innerHTML += `<p>${dyr.navn}, ${dyr.type} fra ${dyr.levested}`;
             })
-
-
-            //            destination.querySelector("h3").textContent = dyr.navn;
-            //            destination.querySelector("p").textContent = `Type: ${dyr.type} Levested: ${dyr.levested}`;
-            //            destination.querySelector("img").src = dyr.billede;
         }
 
     </script>
