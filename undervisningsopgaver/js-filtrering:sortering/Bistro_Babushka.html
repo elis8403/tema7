@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant&family=Courgette&display=swap" rel="stylesheet">
+    <title>Bistro Babushka</title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        * {
+            padding: O auto;
+            margin: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        body {
+            background-color: #c3a6cc
+        }
+
+        /*grid uden mediaquery*/
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 1em;
+            margin: 2em;
+        }
+
+        .mad {
+            padding: 1em;
+            border: 1px solid;
+            border-radius: 1em;
+        }
+
+        .valgt {
+            background-color: #f2e0da
+        }
+
+        /*menu styling*/
+        nav {
+            text-align: center;
+        }
+
+        button {
+            font-size: 1rem;
+            padding-bottom: 3px;
+            padding-top: 3px;
+            border: solid 1px;
+            font-family: 'Assistant', sans-serif;
+            background-color: #c3a6cc;
+            cursor: pointer;
+        }
+
+        h1 {
+            margin: 1rem;
+            font-family: 'Courgette', cursive;
+            color: #65556a
+        }
+
+        h2 {
+            font-family: 'Courgette', cursive;
+        }
+
+        p {
+            font-family: 'Assistant', sans-serif;
+        }
+
+        article {
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .pris {
+            font-weight: 900;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <img src="banner.png" alt="banner">
+
+    <header>
+        <h1>Alle</h1>
+    </header>
+
+    <nav>
+        <button data-kategori="alle" class="valgt">Alle</button>
+        <button data-kategori="forretter">Forretter</button>
+        <button data-kategori="hovedretter">Hovedretter</button>
+        <button data-kategori="desserter">Desserter</button>
+        <button data-kategori="drikkevarer">Drikkevarer</button>
+    </nav>
+
+    <!--her indsætter jeg arrey-->
+    <section id="liste"></section>
+
+    <!--skapelon til arrey-->
+    <template>
+        <article class="mad">
+            <img src="" alt="" class="billede">
+            <h2 class="navn"></h2>
+            <p class="kortbeskrivelse"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+
+    <script>
+        //laver en konstant til headeren
+        const header = document.querySelector("header h1");
+
+        //henter data til array
+        const url = "https://babushka-dd8a.restdb.io/rest/menu";
+
+        const medieurl = "https://babushka-dd8a.restdb.io/media/";
+
+        const myHeaders = {
+            "x-apikey": "600ec2fb1346a1524ff12de4"
+        };
+
+        //først skal DOM loade
+        document.addEventListener("DOMContentLoaded", start)
+        let retter;
+        let filter = "alle";
+
+        // første funktion der kaldes efter DOM er loaded
+        function start() {
+            console.log("start");
+            //giver alle 4 knapper en konstant
+            const filterKnapper = document.querySelectorAll("nav button");
+            //event listeners på alle knapper
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerKategorier));
+            loadJSON();
+        }
+
+        function filtrerKategorier() {
+            console.log("filtrerKategorier");
+            // sæt variablen filter til værdien af data-kategori på den knap der er trykket på
+            filter = this.dataset.kategori;
+            //fjerner markering på gamle markering
+            document.querySelector(".valgt").classList.remove("valgt");
+            //marker den knap der er klikket på
+            this.classList.add("valgt");
+            //kalder functionen efter nye filter er sat på
+            visMad(retter);
+            //h1 tilpasser sig sin text
+            header.textContent = this.textContent;
+            console.log(this);
+        }
+
+        async function loadJSON() {
+            console.log("loadJSON");
+            const JSONData = await fetch("https://babushka-dd8a.restdb.io/rest/menu", {
+                headers: myHeaders
+            });
+
+            retter = await JSONData.json();
+            console.log("retter", retter);
+
+            //kald functionen visMad
+            visMad(retter);
+        }
+
+        //funktion der viser mad i liste view
+        function visMad(listeafmad) {
+            console.log("visMad");
+            const dest = document.querySelector("#liste"); // container til articles med mad
+            const skabelon = document.querySelector("template").content; // select indhold af html skabelon (article)
+            //ryd container inden loop (så der ikke kommer flere og flere retter)
+            dest.textContent = "";
+            listeafmad.forEach(mad => {
+                console.log("kategori");
+                // loop igennem json (retter)
+                if (filter == mad.kategori || filter == "alle") {
+                    const klon = skabelon.cloneNode(true);
+                    klon.querySelector(".billede").src = medieurl + mad.billede;
+                    klon.querySelector(".navn").textContent = mad.navn;
+                    klon.querySelector(".kortbeskrivelse").textContent = mad.kortbeskrivelse;
+                    klon.querySelector(".pris").textContent = mad.pris + ",-";
+                    klon.querySelector(".mad").addEventListener("click", () => visDetaljer(mad));
+                    dest.appendChild(klon);
+                }
+            })
+        }
+
+        function visDetaljer(listeafmad) {
+            console.log("listeafmad");
+            location.href = `Bistro_Babushka_detalje.html?id=${listeafmad._id}`;
+        };
+
+    </script>
+</body>
+
+</html>
